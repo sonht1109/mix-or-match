@@ -1,0 +1,185 @@
+*{padding: 0; margin: 0}
+
+@font-face{
+    font-family: 'Creepy';
+    src: url('Assets/Fonts/Creepy.woff'), url('Assets/Fonts/Creepy.woff2');
+}
+
+@font-face{
+    font-family: 'Lunacy';
+    src: url('Assets/Fonts/Lunacy.woff'), url('Assets/Fonts/Lunacy.woff2');
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    background-image: radial-gradient(rgb(182, 125, 2), rgb(87, 34, 9));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: url("Assets/Cursors/Ghost.cur"), auto;
+}
+
+.game-infor-container{
+    width: 100%;
+}
+
+.title{
+    font-family: 'Creepy';
+    font-size: 60px;
+    user-select: none;
+    color: rgb(252, 84, 42);
+    text-align: center;
+}
+
+.game-infor{
+    font-family: 'Lunacy';
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    user-select: none; 
+    color: rgb(240, 173, 86);
+}
+
+.box-card{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 8px;
+}
+
+.card{
+    width: 80px;
+    height: 120px;
+    cursor: url("Assets/Cursors/GhostHover.cur"), auto;
+    position: relative;
+    perspective: 500px;
+    user-select: none;
+}
+
+.card-face{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 12px;
+    border: 1px solid #ff6f00bd;
+}
+
+.card-back{
+    position: absolute;
+    background-color: black;
+    transition: 0.5s;
+}
+
+.cob-web{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transition: 0.2s ease-in-out;
+}
+
+.cob-web.top-left{top: 0; left: 0; transform: rotate(-90deg);}
+.cob-web.top-right{top: 0; right: 0;}
+.cob-web.bottom-left{bottom: 0; left: 0; transform: rotate(180deg);}
+.cob-web.bottom-right{bottom: 0; right: 0; transform: rotate(90deg);}
+
+.spider{
+    width: 60px;
+    height: auto;
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.2s;
+}
+
+.card-back:hover .spider{
+    top: 0;
+}
+
+.card-face:hover .cob-web{
+    width: 34px;
+    height: 34px;
+}
+
+.card.flip .card-back{
+    transform: rotateY(-180deg);
+}
+
+.card.flip .card-front{
+    transform: rotateY(0);
+}
+
+.card-front{
+    transform: rotateY(180deg);
+    background-color: #ffbb89;
+    border: 1px solid #333;
+    transition: 0.5s;
+}
+
+.card-front .card-icon{
+    width: 68px;
+    height: auto;
+    transition: 0.2s;
+}
+
+.card-icon{
+    transform: scale(0.9);
+}
+
+.card:hover .card-icon{
+    transform: scale(1);
+}
+
+.card.matched .card-icon{
+    animation: dance linear infinite 1s;
+    animation-delay: 0.4s;
+}
+
+
+@keyframes dance{
+    0%, 100%{
+        transform: rotate(0);
+    }
+    25%{
+        transform: rotate(-30deg);
+    }
+    75%{
+        transform: rotate(30deg);
+    }
+}
+
+.overlay-text{
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    font-size: 100px;
+    font-family: "Creepy";
+    z-index: 100;
+    user-select: none;
+}
+
+.overlay-text.visible{
+    display: flex;
+    animation: overlay-grow 1s forwards;
+}
+
+@keyframes overlay-grow{
+    0%{
+        background-color: transparent;
+        font-size: 0;
+    }
+    100%{
+        color: rgb(228, 147, 41);
+        background-color: rgba(0, 0, 0, 0.671);
+    }
+}
